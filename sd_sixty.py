@@ -39,7 +39,7 @@ img = torch.tensor(img, dtype=torch.float32)
 #     im = img[None] # expand for batch dim
 img = img.to('cuda')
 # Load the compiled model
-model = torch.hub.load('E:/yolov5-master/yolov5_v6/yolov5', 'custom', path='E:/yolov5-master/yolov5_v6/yolov5/best.pt',source='local')
+model = torch.hub.load('E:/yolov5-master/yolov5_v6/yolov5', 'custom', path='E:/yolov5-master/yolov5_v6/yolov5/screw_best.pt',source='local')
 # model = torch.load('E:/yolov5-master/yolov5-master/best.pt')
 model.eval()
 names = model.names
@@ -124,8 +124,8 @@ for i, det in enumerate(pred):  # per image
                     blurred = cv2.GaussianBlur(gray, (5, 5), 1.5)
                     # Subtract the blurred image from the original image
                     sharpened = cv2.addWeighted(gray, 1.5, blurred, -0.5, 0)
-                    # edges = cv2.Canny(sharpened, 50, 150)
-                    circles = cv2.HoughCircles(sharpened, cv2.HOUGH_GRADIENT, 1, 20, param1=100, param2=30, minRadius=0,
+                    edges = cv2.Canny(sharpened, 50, 150)
+                    circles = cv2.HoughCircles(edges, cv2.HOUGH_GRADIENT, 1, 20, param1=100, param2=30, minRadius=0,
                                                maxRadius=0)
                     if circles is None:
                         print("no circles detected")

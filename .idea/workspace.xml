@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b29cf6d9-665a-40e6-b593-d7baedc2bfe6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/spilt_train.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sd_sixty.py" beforeDir="false" afterPath="$PROJECT_DIR$/sd_sixty.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +102,8 @@
       <workItem from="1676209880330" duration="549000" />
       <workItem from="1676295968718" duration="382000" />
       <workItem from="1676405302625" duration="596000" />
+      <workItem from="1676492770790" duration="1370000" />
+      <workItem from="1676534910309" duration="4447000" />
     </task>
     <servers />
   </component>
@@ -107,26 +111,26 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1676405323204">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1676493173788">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1676405323204" />
-    <state width="1493" height="173" key="GridCell.Tab.0.bottom" timestamp="1676296379002">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1676493173788" />
+    <state width="1493" height="173" key="GridCell.Tab.0.bottom" timestamp="1676494182141">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676296379002" />
-    <state width="1493" height="173" key="GridCell.Tab.0.center" timestamp="1676296379002">
+    <state width="1493" height="173" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1676494182141" />
+    <state width="1493" height="173" key="GridCell.Tab.0.center" timestamp="1676494182141">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1676296379002" />
-    <state width="1493" height="173" key="GridCell.Tab.0.left" timestamp="1676296379002">
+    <state width="1493" height="173" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1676494182141" />
+    <state width="1493" height="173" key="GridCell.Tab.0.left" timestamp="1676494182140">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1676296379002" />
-    <state width="1493" height="173" key="GridCell.Tab.0.right" timestamp="1676296379002">
+    <state width="1493" height="173" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1676494182140" />
+    <state width="1493" height="173" key="GridCell.Tab.0.right" timestamp="1676494182141">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="173" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1676296379002" />
+    <state width="1493" height="173" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1676494182141" />
     <state x="270" y="56" key="SettingsEditor" timestamp="1676060953548">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -137,7 +141,7 @@
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1676116989084" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/yolov5$sd_sixty.coverage" NAME="sd_sixty Coverage Results" MODIFIED="1676296212104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yolov5$sd_sixty.coverage" NAME="sd_sixty Coverage Results" MODIFIED="1676493742519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yolov5$sd_fifty.coverage" NAME="sd_fifty Coverage Results" MODIFIED="1676114968551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
