@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b29cf6d9-665a-40e6-b593-d7baedc2bfe6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/spilt_train.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sd_sixty.py" beforeDir="false" afterPath="$PROJECT_DIR$/sd_sixty.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +101,7 @@
       <workItem from="1676295968718" duration="382000" />
       <workItem from="1676405302625" duration="596000" />
       <workItem from="1676492770790" duration="1370000" />
-      <workItem from="1676534910309" duration="4447000" />
+      <workItem from="1676534910309" duration="5041000" />
     </task>
     <servers />
   </component>

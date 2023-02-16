@@ -6,7 +6,7 @@ from utils.plots import Annotator,Colors
 from utils.augmentations import letterbox
 
 
-def load_image(img_size = 640,augment = True,path):
+def load_image(path,img_size = 640,augment = True,):
     img = cv2.imread(path)  # BGR
     assert img is not None, 'Image Not Found ' + path
     h0, w0 = img.shape[:2]  # orig hw
@@ -22,7 +22,7 @@ def load_model():
     # model = torch.load('E:/yolov5-master/yolov5-master/best.pt')
     names = model.names
     colors = Colors()
-    return model,names,colors
+    return model, names, colors
 
 def detect_screw(path,model,names,colors):
     model.eval()
@@ -144,5 +144,7 @@ def detect_screw(path,model,names,colors):
     print(det)
     cv2.namedWindow("Screw Detection",cv2.WINDOW_NORMAL)
     cv2.imshow("Screw Detection", img1)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+model, names, colors = load_model()
+detect_screw("F:/lunwen/screwdataset/23_02_06_03_Color.png",model,names,colors)
