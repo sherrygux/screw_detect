@@ -6,6 +6,7 @@ from utils.plots import Annotator,Colors
 from utils.augmentations import letterbox
 
 
+
 def load_image(path,img_size = 640,augment = True,):
     img = cv2.imread(path)  # BGR
     assert img is not None, 'Image Not Found ' + path
@@ -80,7 +81,7 @@ def detect_screw(path,model,names,colors):
                 #     line = (cls, *xywh, conf) if save_conf else (cls, *xywh)  # label format
                 #     with open(txt_path + '.txt', 'a') as f:
                 #         f.write(('%g ' * len(line)).rstrip() % line + '\n')
-                # if conf>0.4:
+                if conf>0.4:
                 # if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
                         label =  f'{names[c]} {conf:.2f}'
@@ -117,27 +118,107 @@ def detect_screw(path,model,names,colors):
                         print('class index is', class_index)
                         print('detected object name is', object_name)
                         #find center
-                        original_img = img0
+                        # original_img = img0
                         cropped_img = img0[y1:y2,x1:x2, :]
-                        # Turn to Gray
+                        # # Turn to Gray
+                        # gray = cv2.cvtColor(cropped_img, cv2.COLOR_BGR2GRAY)
+                        # blurred = cv2.GaussianBlur(gray, (5, 5), 1.5)
+                        # # Subtract the blurred image from the original image
+                        # sharpened = cv2.addWeighted(gray, 1.5, blurred, -0.5, 0)
+                        # edges = cv2.Canny(sharpened, 50, 150)
+                        # circles = cv2.HoughCircles(edges, cv2.HOUGH_GRADIENT, 1, 20, param1=100, param2=30, minRadius=0,
+                        #                            maxRadius=0)
+                        # if circles is None:
+                        #     print("no circles detected")
+                        # if circles is not None:
+                        #     circles = np.uint16(np.around(circles))
+                        #     for i in circles[0, :]:
+                        #         # outer circle
+                        #         cv2.circle(img1, (i[0]+x1, i[1]+y1), i[2], (0, 0, 255), 2)
+                        #         # center
+                        #         cv2.circle(img1, (i[0]+x1, i[1]+y1), 1, (255, 0, 0), 2)
+                        #         print(i[0]+x1, i[1]+y1, i[2])
+                        # # cv2.imwrite('test.png',cropped_img)
+                        # img = cv2.imread(img_path)
+                        # print(filename)
+                        # Apply the image processing
+                        # Convert the image to grayscale
                         gray = cv2.cvtColor(cropped_img, cv2.COLOR_BGR2GRAY)
-                        blurred = cv2.GaussianBlur(gray, (5, 5), 1.5)
-                        # Subtract the blurred image from the original image
-                        sharpened = cv2.addWeighted(gray, 1.5, blurred, -0.5, 0)
-                        edges = cv2.Canny(sharpened, 50, 150)
-                        circles = cv2.HoughCircles(edges, cv2.HOUGH_GRADIENT, 1, 20, param1=100, param2=30, minRadius=0,
-                                                   maxRadius=0)
-                        if circles is None:
-                            print("no circles detected")
-                        if circles is not None:
-                            circles = np.uint16(np.around(circles))
-                            for i in circles[0, :]:
-                                # outer circle
-                                cv2.circle(img1, (i[0]+x1, i[1]+y1), i[2], (0, 0, 255), 2)
-                                # center
-                                cv2.circle(img1, (i[0]+x1, i[1]+y1), 1, (255, 0, 0), 2)
-                                print(i[0]+x1, i[1]+y1, i[2])
-                        # cv2.imwrite('test.png',cropped_img)
+                        # cv2.namedWindow("gray",cv2.WINDOW_NORMAL)
+                        # cv2.imshow("gray", gray)
+                        # Apply a Gaussian blur to remove noise
+                        blur = cv2.GaussianBlur(gray, (5, 5), 0)
+                        # cv2.namedWindow("blur",cv2.WINDOW_NORMAL)
+                        # cv2.imshow("blur", blur)
+                        # Apply adaptive thresholding to segment the screws
+                        thresh = cv2.adaptiveThreshold(blur, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
+
+                        # Apply dilation to strengthen contour lines
+                        kernel = np.ones((3, 3), np.uint8)
+                        dilated = cv2.dilate(thresh, kernel, iterations=1)
+                        # Find contours of the screws
+                        contours, hierarchy = cv2.findContours(dilated, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+                        # Filter out small contours
+                        min_area = 250  # Minimum area to keep a contour
+                        screw_contours = []
+                        for cnt in contours:
+                            area = cv2.contourArea(cnt)
+                            if area > min_area:
+                                screw_contours.append(cnt)
+                        screw_polygons = []
+                        # Loop through all the contours
+                        for cnt in screw_contours:
+                            # Approximate the contour with a polygon
+                            epsilon = 0.01 * cv2.arcLength(cnt, True)
+                            # epsilon = 0.005 * cv2.arcLength(cnt, True)
+                            approx = cv2.approxPolyDP(cnt, epsilon, True)
+
+                            # Check if the polygon is already in the list
+                            match = False
+                            for poly in screw_polygons:
+                                similarity = cv2.matchShapes(poly, approx, cv2.CONTOURS_MATCH_I3, 0.0)
+                                print(similarity)
+                                if similarity > 0.01:
+                                    match = True
+                                    break
+
+                            if not match:
+                                screw_polygons.append(approx)
+
+                        # # Draw contours on the original image
+                        # cv2.drawContours(img, screw_polygons, -1, (0, 255, 0), 2)
+                        #
+                        # # Find the center of each screw
+                        centers = []
+                        for cnt in screw_polygons:
+                            # Get the moments of the contour
+                            M = cv2.moments(cnt)
+                            # Calculate the centroid of the contour
+                            cx = int(M['m10'] / M['m00'])
+                            cy = int(M['m01'] / M['m00'])
+                            centers.append((cx, cy))
+                            # Draw a circle at the center of the contour
+                            cv2.circle(img1, (cx+x1, cy+y1), 3, (0, 0, 255), -1)
+
+                        # Get the image dimensions
+                        height, width, channels = cropped_img.shape
+
+                        # Set the center of the circle
+                        center = centers[0]
+
+                        # Calculate the maximum possible radius of the circle
+                        max_radius = min(center[0], center[1], width - center[0], height - center[1])
+
+                        # Initialize the radius to the maximum possible radius
+                        radius = max_radius
+
+                        # Check if the circle extends outside of the image
+                        while center[0] - radius < 0 or center[0] + radius > width or center[1] - radius < 0 or center[
+                            1] + radius > height:
+                            radius -= 1
+
+                        # Draw the circle on the image
+                        cv2.circle(img1, (center[0]+x1, center[1]+y1), radius, (0, 255, 0), 2)
 
 
     det = det.tolist()
@@ -147,4 +228,4 @@ def detect_screw(path,model,names,colors):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 model, names, colors = load_model()
-detect_screw("F:/lunwen/screwdataset/23_02_06_03_Color.png",model,names,colors)
+detect_screw("F:/lunwen/dataset_screw/IMG_5973_2.jpg",model,names,colors)
