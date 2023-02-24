@@ -19,7 +19,7 @@ def load_image(path,img_size = 640,augment = True,):
 
 def load_model():
     model = torch.hub.load('E:/yolov5-master/yolov5_v6/yolov5', 'custom',
-                           path='E:/yolov5-master/yolov5_v6/yolov5/screw_best.pt', source='local')
+                           path='E:/yolov5-master/yolov5_v6/yolov5/screw_nr_best.pt', source='local')
     # model = torch.load('E:/yolov5-master/yolov5-master/best.pt')
     names = model.names
     colors = Colors()
@@ -81,7 +81,7 @@ def detect_screw(path,model,names,colors):
                 #     line = (cls, *xywh, conf) if save_conf else (cls, *xywh)  # label format
                 #     with open(txt_path + '.txt', 'a') as f:
                 #         f.write(('%g ' * len(line)).rstrip() % line + '\n')
-                if conf>0.4:
+                # if conf>0.4:
                 # if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
                         label =  f'{names[c]} {conf:.2f}'
@@ -228,4 +228,4 @@ def detect_screw(path,model,names,colors):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 model, names, colors = load_model()
-detect_screw("F:/lunwen/dataset_screw/IMG_5973_2.jpg",model,names,colors)
+detect_screw("F:/lunwen/dirty_rusty/IMG_5973_2.jpg",model,names,colors)
