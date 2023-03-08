@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b29cf6d9-665a-40e6-b593-d7baedc2bfe6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/models/yolov5s_small.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spilt_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/spilt_train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov7_result/best.pt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,6 +133,8 @@
       <workItem from="1676659708248" duration="764000" />
       <workItem from="1677089997643" duration="665000" />
       <workItem from="1677144074928" duration="2977000" />
+      <workItem from="1677317342711" duration="807000" />
+      <workItem from="1677518110822" duration="608000" />
     </task>
     <servers />
   </component>

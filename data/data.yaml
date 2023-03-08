@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 5
+names: ['Hex Washer Screw', 'Hexagonal Bolt', 'Philips Screw', 'Pozidriv Screw', 'Torx Screw']
+
+roboflow:
+  workspace: corrosion-a1pkl
+  project: screw_detect_classification
+  version: 6
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/corrosion-a1pkl/screw_detect_classification/dataset/6
